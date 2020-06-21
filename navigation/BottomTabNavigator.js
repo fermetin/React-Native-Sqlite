@@ -18,9 +18,11 @@ export default function BottomTabNavigator({ navigation, route }) {
     return (
         <BottomTab.Navigator
                 tabBarOptions={{
-                    showLabel:false
+                    showLabel:false,
+                    style:{
+                    }
                 }}
-        >
+            >
             <BottomTab.Screen
                 name="Home"
                 component={HomeStackNavigator}

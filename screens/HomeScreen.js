@@ -1,7 +1,10 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
+
 const HomeScreen = () => {
+    //List all places the user have
+
 
     return (
         <View style={styles.container} >
