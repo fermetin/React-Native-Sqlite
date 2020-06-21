@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeStackNavigator from './HomeStackNavigator'
 import ProfileStackNavigator from './ProfileStackNavigator'
 import TabBarIcon from '../components/TabBarIcon'
+import Colors from '../constants/Colors'
 
 const BottomTab = createBottomTabNavigator()
 const INITAL_ROUTE_NAME = "Home"
@@ -11,28 +12,39 @@ const INITAL_ROUTE_NAME = "Home"
 export default function BottomTabNavigator({ navigation, route }) {
 
     navigation.setOptions({
-        headerTitle: getHeaderName(route)
+        headerTitle: getHeaderName(route),
     })
 
     return (
-        <BottomTab.Navigator>
+        <BottomTab.Navigator
+                tabBarOptions={{
+                    showLabel:false
+                }}
+        >
             <BottomTab.Screen
                 name="Home"
                 component={HomeStackNavigator}
                 options={{
-                    tabBarIcon: ({ focused }) =>  <TabBarIcon focused={focused} name="md-code-working" /> 
+                    tabBarLabel:'Home',
+                    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />
                 }}
             />
             <BottomTab.Screen
                 name="Profile"
                 component={ProfileStackNavigator}
-                options = {{
-                    tabBarIcon: ({ focused }) =>  <TabBarIcon focused={focused} name="md-person" /> 
+                options={{
+                    tabBarLabel:"Profile",
+                    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />
                 }}
             />
         </BottomTab.Navigator>
     )
 }
+
+const allPartOfTabBarOptions = {
+    tabBarLabel: "",
+}
+
 
 function getHeaderName(route) {
 

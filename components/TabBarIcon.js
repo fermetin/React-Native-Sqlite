@@ -10,8 +10,8 @@ export default function TabBarIcon({focused,name}) {
         <Ionicons 
             name={name}
             size={30}
-            style={{marginBottom:-3}}
-            focused={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+            style={{}}
+            color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
         />
     )
 }
