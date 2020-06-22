@@ -8,7 +8,6 @@ const initialState = {
 export const palcesReducer = (state = initialState, actions) => {
     switch(actions.type){
      
-           
     }
     return state
 }

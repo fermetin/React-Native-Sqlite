@@ -1,4 +1,4 @@
-export class Place {
+export class PlaceModel {
     constructor(id, name, city, adress, imageUrl) {
         this.id = id
         this.name = name

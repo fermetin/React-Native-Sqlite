@@ -3,7 +3,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeStackNavigator from './HomeStackNavigator'
 import ProfileStackNavigator from './ProfileStackNavigator'
-import TabBarIcon from '../components/TabBarIcon'
+import TabBarIcon from '../components/Icons/TabBarIcon'
 import Colors from '../constants/Colors'
 
 const BottomTab = createBottomTabNavigator()

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet, Button, Platform, Image, Alert } from 'react-native'
 
 import * as ImagePicker from 'expo-image-picker'
-import TakePicture from '../components/TakePicture';
 
 
 const AddPlaceScreen = () => {
