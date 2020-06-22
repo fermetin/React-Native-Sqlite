@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {createStackNavigator} from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
 
 import HomeScreen from '../screens/HomeScreen'
 import AddPlaceScreen from '../screens/AddPlaceScreen'
@@ -9,26 +9,26 @@ import PlaceDetailsScreen from '../screens/PlaceDetailsScreen'
 
 const HomeStack = createStackNavigator()
 
-export default function HomeStackNavigator() {
+const HomeStackNavigator = () => {
     return (
-        //initial name gonna change !!!!!
-        <HomeStack.Navigator initialRouteName="Home">
-            <HomeStack.Screen 
+
+        <HomeStack.Navigator  >
+            <HomeStack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{}}
             />
-             <HomeStack.Screen 
+            <HomeStack.Screen
                 name="Add Place Screen"
                 component={AddPlaceScreen}
                 options={{}}
             />
-             <HomeStack.Screen 
+            <HomeStack.Screen
                 name="Map"
                 component={FullSizeMapScreen}
                 options={{}}
             />
-             <HomeStack.Screen 
+            <HomeStack.Screen
                 name="Place Details Screen"
                 component={PlaceDetailsScreen}
                 options={{}}
@@ -36,3 +36,4 @@ export default function HomeStackNavigator() {
         </HomeStack.Navigator>
     )
 }
+export default HomeStackNavigator

@@ -1,13 +1,12 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Button ,Text, View, StyleSheet } from 'react-native'
 
-const FullSizeMapScreen = () => {
+const FullSizeMapScreen = ({ navigation, route }) => {
     //details for each place
+    
     return (
-        <View>
-            <Text>
-                FullSizeMapScreen
-            </Text>
+        <View style={{flex:1}} >
+                <Button  title="denee" onPress={()=>navigation.navigate("Home")}/>
         </View>
     )
 }

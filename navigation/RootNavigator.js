@@ -6,7 +6,7 @@ import BottomTabNavigator from './BottomTabNavigator'
 
 const RootStack = createStackNavigator()
 
-export default function RootNavigator() {
+const RootNavigator = () => {
     return (
         <RootStack.Navigator>
             <RootStack.Screen
@@ -16,4 +16,6 @@ export default function RootNavigator() {
         </RootStack.Navigator>
     )
 }
+
+export default RootNavigator
 

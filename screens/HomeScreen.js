@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, FlatList } from 'react-native'
+import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import  Place  from '../components/UI/Place'
@@ -12,13 +12,13 @@ const HomeScreen = () => {
 
    
     return (
-        <View style={styles.container} >
+        <SafeAreaView style={styles.container} >
             <FlatList
                 data={allPlaces}
                 keyExtractor={(item,index) => item.id + index}
                 renderItem={({ item }) => <Place item={item} />}
             />
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -29,3 +29,6 @@ const styles = StyleSheet.create({
 })
 
 export default HomeScreen
+/**
+ * 
+ */

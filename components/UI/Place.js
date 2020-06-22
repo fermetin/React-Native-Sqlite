@@ -4,24 +4,17 @@ import { Images } from '../../constants/Images'
 import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler'
 
 const Place = ({ item }) => {
-    const [image, setImage] = useState()
-    const [defaultImage, setdefaultImage] = useState(true)
-    const [error, setError] = useState(false)
 
-    useEffect(() => {
-        const image = defaultImage ? require('../../assets/foti.png') : (error ? require('../../assets/foti.png') : { uri: item.imageUrl })
-
-        setImage(image)
-    }, [image, defaultImage])
+    const [image, setimage] = useState(item.imagUrl)
 
     return (
         <View style={styles.container}>
             <View style={styles.imageContiner} >
                 <Image
+                    defaultSource={require('../../assets/foti.jpg')}
                     source={image}
                     style={styles.imageStyle}
-                    onLoadEnd={() => setdefaultImage(false)}
-                    onError={() => setError(true)}
+                    onError={()=>setimage(Images.defaultImage)}
                     resizeMode='contain'
                 />
             </View>
@@ -46,12 +39,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     imageContiner: {
-        backgroundColor: 'black',
         margin: 20
     },
     imageStyle: {
         width: 100,
-        height: 100
+        height: 100 
     },
     infContainer:{
         flex:1,
