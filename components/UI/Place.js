@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
-import { Images } from '../../constants/Images'
 import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler'
+import { Images } from '../../constants/Images'
 
 const Place = ({ item }) => {
-
-    const [image, setimage] = useState(item.imagUrl)
 
     return (
         <View style={styles.container}>
             <View style={styles.imageContiner} >
                 <Image
-                    defaultSource={require('../../assets/foti.jpg')}
-                    source={image}
+                    source={Images.expoiconImages}
                     style={styles.imageStyle}
-                    onError={()=>setimage(Images.defaultImage)}
                     resizeMode='contain'
                 />
             </View>
@@ -43,24 +39,24 @@ const styles = StyleSheet.create({
     },
     imageStyle: {
         width: 100,
-        height: 100 
+        height: 100
     },
-    infContainer:{
-        flex:1,
-        alignItems:'center'
+    infContainer: {
+        flex: 1,
+        alignItems: 'center'
     },
-    headerContainer:{
-        flex:1,
+    headerContainer: {
+        flex: 1,
     },
-    headerStyle:{
-        fontSize:28,
-        fontWeight:'bold'
+    headerStyle: {
+        fontSize: 28,
+        fontWeight: 'bold'
     },
-    addressContainer:{
+    addressContainer: {
 
     },
-    adressTextStyle:{
-        fontSize:22,
+    adressTextStyle: {
+        fontSize: 22,
     }
 });
 

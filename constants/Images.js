@@ -1,3 +1,4 @@
 export const Images = {
-    defaultImage:'../assets/foti.png'
+    defaultImage:require('../assets/foti.png'),
+    expoiconImages : require('../assets/icon.png')
 }
