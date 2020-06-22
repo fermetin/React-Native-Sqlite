@@ -12,7 +12,7 @@ const HomeStack = createStackNavigator()
 export default function HomeStackNavigator() {
     return (
         //initial name gonna change !!!!!
-        <HomeStack.Navigator initialRouteName="Add Place Screen">
+        <HomeStack.Navigator initialRouteName="Home">
             <HomeStack.Screen 
                 name="Home"
                 component={HomeScreen}

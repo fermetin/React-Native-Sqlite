@@ -47,7 +47,7 @@ const AddPlaceScreen = () => {
             fetchPhoto()
         }
     }
-
+    
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Button title="Take Picture From Roll" onPress={() => getPhotoAllStaff(false)} />
