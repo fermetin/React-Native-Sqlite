@@ -8,7 +8,7 @@ import AddPlaceScreen from '../screens/AddPlaceScreen'
 const ProfileStack = createStackNavigator()
 
 const ProfileStackNavigator = ({route}) => {
-    console.log(route)
+    
     return (
         <ProfileStack.Navigator>
             <ProfileStack.Screen 

@@ -18,7 +18,7 @@ const RootNavigator = ({ navigation }) => {
             screenOptions={{
                 headerTintColor:"transparent",
                 headerStyle: {
-                    height: 160
+                    height: 160,
                 },
                 headerBackground: () => <RandomImage />//downside
             }}
