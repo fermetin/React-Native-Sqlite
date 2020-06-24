@@ -2,30 +2,35 @@ import React from 'react'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
+
+import { Images } from '../constants/Images'
+
 import HomeStackNavigator from './HomeStackNavigator'
 import ProfileStackNavigator from './ProfileStackNavigator'
 
 import TabBarIcon from '../components/Icons/TabBarIcon'
 import PlaceDetailsScreen from '../screens/PlaceDetailsScreen'
 
+
 const BottomTab = createBottomTabNavigator()
 const INITAL_ROUTE_NAME = "Home"
 
 export default function BottomTabNavigator({ navigation, route }) {
-    
+
     navigation.setOptions({
-        headerTitle:route.name
+        headerTitle: route.name,
     })
 
     return (
         <BottomTab.Navigator
-                initialRouteName={INITAL_ROUTE_NAME}
-            >
+            initialRouteName={INITAL_ROUTE_NAME}
+            
+        >
             <BottomTab.Screen
                 name="Home"
                 component={HomeStackNavigator}
                 options={{
-                    tabBarLabel:'Home',
+                    tabBarLabel: 'Home',
                     tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />
                 }}
             />
@@ -33,7 +38,7 @@ export default function BottomTabNavigator({ navigation, route }) {
                 name="Profile"
                 component={ProfileStackNavigator}
                 options={{
-                    tabBarLabel:"Profile",
+                    tabBarLabel: "Profile",
                     tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />
                 }}
             />
