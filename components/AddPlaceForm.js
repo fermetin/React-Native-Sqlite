@@ -13,7 +13,7 @@ import * as yup from 'yup'
 import { compose } from 'redux'
 
 
-const AddPlaceForm = () => {
+const AddPlaceForm = ({onSubmitHandler}) => {
 
     //compose right to left puting the argument each func(ARGUMENT IS TEXRFIELD)
     const MyInput = compose(
@@ -22,6 +22,8 @@ const AddPlaceForm = () => {
 
     let validationSchema = yup.object().shape({
         placename: yup.string().required("Required").max(18).min(4),
+        adress : yup.string().required("Required").max(30).min(3),
+        city: yup.string().required("Required"),
         description: yup.string().required("Required").min(5),
         note: yup.string().notRequired(true).max(30),
     })
@@ -32,14 +34,16 @@ const AddPlaceForm = () => {
         <Formik
             initialValues={{ placename: "", description: '', note: '' }}
             validationSchema={validationSchema}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => onSubmitHandler(values)}
         >
             {props => {
                 return (
                         <Form style={styles.formCont} >
                             <MyInput label="Place Name" name="placename" type="name" />
+                            <MyInput label="Adress" name="adress" type="adress" />
+                            <MyInput label="City" name="city" type="city" />
                             <MyInput label="Description" name="description" type="description" />
-                            <MyInput label="Note" name="note" type="note" />
+                            <MyInput label="Notes" name="note" type="note" />
                             <Button title="Submmit" color="red" onPress={() => props.handleSubmit()} />
                         </Form> 
                 )

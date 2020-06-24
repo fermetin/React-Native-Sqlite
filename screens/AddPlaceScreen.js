@@ -12,12 +12,20 @@ import AddPlaceForm from '../components/AddPlaceForm'
 const AddPlaceScreen = () => {
     const [imageResult, setImageResult] = useState(null)
 
-    const addingPlace = (placeInfoInputs)=>{
+    const addingPlace = (placeInfoInputs) => {
         const currentDate = new Date()
-        
-        const rendom = Math.floor(Math.random()*1000)
-        /// hold
-        const newPlace = new PlaceModel(`p${rendom}`,placeInfoInputs.placename,) 
+
+        const rendom = Math.floor(Math.random() * 10000)
+
+
+        const newPlace = new PlaceModel(
+            `p${rendom}`,
+            placeInfoInputs.placename,
+            placeInfoInputs.city,
+            placeInfoInputs.adress,
+            imageResult.uri)
+        ////////  let sleepeppepepepke
+        console.log(newPlace,currentDate,rendom)
     }
 
     const allInputsHandler = (placeInfoInputs) => {
@@ -31,7 +39,7 @@ const AddPlaceScreen = () => {
                     {
                         text: "Let's Look",
                         onPress: () => { },
-                        style:"cancel"
+                        style: "cancel"
                     }])
         }
     }
@@ -66,7 +74,7 @@ const AddPlaceScreen = () => {
                 console.log(error)
             }
         }
-        if (image !== null) {
+        if (imageResult !== null) {
             Alert.alert("Heyy", "Are you sure you gonna change Photo", [{ text: "Yes", onPress: () => fetchPhoto() }, { text: 'Cancel' }])
         } else {
             fetchPhoto()
@@ -79,7 +87,7 @@ const AddPlaceScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.formStyle}>
-                <AddPlaceForm />
+                <AddPlaceForm onSubmitHandler = {allInputsHandler} />
             </View>
             <View style={styles.imageAndButtons}>
                 {imageResult?.uri && <Image source={{ uri: imageResult?.uri }} style={styles.imageStyle} />}
