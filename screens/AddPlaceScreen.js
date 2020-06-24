@@ -1,11 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Button, Platform, Image, Alert } from 'react-native'
+import { Text, View, StyleSheet, Button, Platform, Image, Alert, BackHandler } from 'react-native'
 
 import * as ImagePicker from 'expo-image-picker'
 
+import { PlaceModel } from '../model/PlaceModel'
+
+import { TextInput } from 'react-native-gesture-handler'
+import AddPlaceForm from '../components/AddPlaceForm'
+
 
 const AddPlaceScreen = () => {
-    const [image, setImage] = useState(null)
+    const [imageResult, setImageResult] = useState(null)
+
+    const addingPlace = (placeInfoInputs)=>{
+        const currentDate = new Date()
+        
+        const rendom = Math.floor(Math.random()*1000)
+        /// hold
+        const newPlace = new PlaceModel(`p${rendom}`,placeInfoInputs.placename,) 
+    }
+
+    const allInputsHandler = (placeInfoInputs) => {
+        if (imageResult) {
+            Alert.alert("Ohhh yee", "Every thing is good but maybe you wanna look up one more time ;)",
+                [
+                    {
+                        text: "Gooo",
+                        onPress: () => addingPlace(placeInfoInputs)
+                    },
+                    {
+                        text: "Let's Look",
+                        onPress: () => { },
+                        style:"cancel"
+                    }])
+        }
+    }
 
     const getPhotoAllStaff = (fromCamera) => {
         const fetchPhoto = async () => {
@@ -13,16 +42,15 @@ const AddPlaceScreen = () => {
                 if (fromCamera) {
                     const { status } = await ImagePicker.requestCameraPermissionsAsync()
                     if (status !== "granted") {
-                        Alert.alert('Ohoooo NoT GRANTED')
+                        Alert.alert('You can not Add any place beyb if you dont allow ;)')
                         return
                     }
                     const result = await ImagePicker.launchCameraAsync()
-                    if(result.cancelled)return
-                    setImage(result.uri)
+                    handleImageResult(result)
                 } else {
                     const { status } = await ImagePicker.requestCameraRollPermissionsAsync()
                     if (status !== "granted") {
-                        Alert.alert('Ohoooo NoT GRANTED')
+                        Alert.alert('You can not Add any place beyb if you dont allow ;)')
                         return
                     }
                     const result = await ImagePicker.launchImageLibraryAsync({
@@ -31,34 +59,57 @@ const AddPlaceScreen = () => {
                         aspect: [10, 10],
                         quality: 0.5
                     })
-                    if(result.cancelled)return
-                    setImage(result.uri)
+                    handleImageResult(result)
                 }
 
             } catch (error) {
                 console.log(error)
             }
         }
-        if (image !== null)
-        {
-            Alert.alert("Heyy", "Are you sure you gonna change Photo", [{ text: "Yes" ,onPress:()=>fetchPhoto()}, { text: 'Cancel' }])
-        }else{
+        if (image !== null) {
+            Alert.alert("Heyy", "Are you sure you gonna change Photo", [{ text: "Yes", onPress: () => fetchPhoto() }, { text: 'Cancel' }])
+        } else {
             fetchPhoto()
         }
     }
-    
+    const handleImageResult = (res) => {
+        if (res.cancelled) return
+        setImageResult(res)
+    }
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button title="Take Picture From Roll" onPress={() => getPhotoAllStaff(false)} />
-            <Button title="Take Picture From Camera" onPress={() => getPhotoAllStaff(true)} />
-            {image && <Image source={{ uri: image }} style={styles.imageStyle} />}
+        <View style={styles.container}>
+            <View style={styles.formStyle}>
+                <AddPlaceForm />
+            </View>
+            <View style={styles.imageAndButtons}>
+                {imageResult?.uri && <Image source={{ uri: imageResult?.uri }} style={styles.imageStyle} />}
+                <View style={styles.btns}>
+                    <Button title="Take Picture From Roll" color="#02f1ca" onPress={() => getPhotoAllStaff(false)} />
+                    <Button title="Take Picture From Camera" color="#02f1ca" onPress={() => getPhotoAllStaff(true)} />
+                </View>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    imageAndButtons: {
+        flexDirection: 'column',
+    },
+    formStyle: {
+        marginBottom: 40
+    },
+    btns: {
+        marginVertical: 30,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
     imageStyle: {
-        width: 300,
+        width: "100%",
         height: 300,
         resizeMode: "contain"
     }

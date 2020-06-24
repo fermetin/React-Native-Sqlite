@@ -10,6 +10,7 @@ import ProfileStackNavigator from './ProfileStackNavigator'
 
 import TabBarIcon from '../components/Icons/TabBarIcon'
 import PlaceDetailsScreen from '../screens/PlaceDetailsScreen'
+import AddPlaceScreen from '../screens/AddPlaceScreen'
 
 
 const BottomTab = createBottomTabNavigator()
@@ -24,7 +25,7 @@ export default function BottomTabNavigator({ navigation, route }) {
     return (
         <BottomTab.Navigator
             initialRouteName={INITAL_ROUTE_NAME}
-            
+
         >
             <BottomTab.Screen
                 name="Home"
@@ -34,6 +35,13 @@ export default function BottomTabNavigator({ navigation, route }) {
                     tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />
                 }}
             />
+                <BottomTab.Screen
+                    name="AddPlace"
+                    component={AddPlaceScreen}
+                    options={{
+                        tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-add" />
+                    }}
+                />
             <BottomTab.Screen
                 name="Profile"
                 component={ProfileStackNavigator}
