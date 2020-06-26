@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         height:140,
-        margin:10,
+        margin:15,
         ...Platform.select({
             ios: {
               shadowColor: 'black',
@@ -51,8 +51,9 @@ const styles = StyleSheet.create({
             //img cont
         },
     imageStyle: {
-        width: 100,
-        height: 139
+        width: 140,
+        height: 139,
+        borderRadius:70
     },
     infContainer: {
         width:"90%",
