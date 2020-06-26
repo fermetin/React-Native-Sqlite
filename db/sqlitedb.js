@@ -24,13 +24,15 @@ export const initDb = () => {
 
 export const insertPlace = (place) => {
     const promise = new Promise((resolve, reject) => {
-
+      
         db.transaction((transaction) => {
             transaction.executeSql(
-                'INSERT INTO places (name, city, adress, lat, lng, imageUri, date) VALUES(?,?,?,?,?,?)'),
-                [place.name, place.city, place.adress, place.lat, place.lng, place.imageUri, place.date],
+                'INSERT INTO places (name, city, adress, lat, lng, imageUri, date) VALUES(?,?,?,?,?,?,?)',
+                [place.name, place.city, place.adress, place.lat, place.lng, place.imgUrl, place.date],
                 (_, result) => { resolve(result) },
                 (_, error) => { reject(error) }
+                )
         })
     })
+    return promise
 }

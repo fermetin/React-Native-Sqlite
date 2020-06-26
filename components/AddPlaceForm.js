@@ -32,7 +32,7 @@ const AddPlaceForm = ({ onSubmitHandler, isPhotoValid }) => {
     const onSubmit = (values, { resetForm }) => {
         if (isPhotoValid) {
             onSubmitHandler(values)
-            resetForm({})
+            //resetForm({})
             
         } else {
             Alert.alert("Heyy", "Photo Required Heyyy", [{ text: "Okey" }])

@@ -15,8 +15,7 @@ import { initDb } from './db/sqlitedb'
 
 initDb()
   .then((val)=>{
-
-  console.log('Db Initialize Succesfully',val)
+  console.log('Db Initialize Succesfully')
 })
   .catch((err)=>{
   

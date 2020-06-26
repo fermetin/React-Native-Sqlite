@@ -22,13 +22,14 @@ const AddPlaceScreen = ({ navigation }) => {
 
         const currentDate = new Date()
 
-        const randomCount = Math.floor(Math.random() * 10000)
 
         const newPlace = new PlaceModel(
-            `p${randomCount}`,
+            '',
             placeFormInputs.placename,
             placeFormInputs.city,
             placeFormInputs.adress,
+            434352,
+            345345,
             pickedimageResult.uri,
             currentDate.toString())
 
