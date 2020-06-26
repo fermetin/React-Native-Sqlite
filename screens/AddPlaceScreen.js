@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { PlaceModel } from '../model/PlaceModel'
 
 import { useDispatch } from 'react-redux'
-import * as placeActions from '../store/actions/places'
+import * as placeActions from '../store/actions/places-actions'
 
 import { TextInput } from 'react-native-gesture-handler'
 import AddPlaceForm from '../components/AddPlaceForm'
@@ -16,8 +16,8 @@ import { Images } from '../constants/Images'
 const AddPlaceScreen = ({ navigation }) => {
     const dispatch = useDispatch()
 
-    const [imageResult, setImageResult] = useState(null)
-
+    const [pickedimageResult, setPickedImageResult] = useState(null)
+    
     const addNewPlaceRedux = (placeFormInputs) => {
 
         const currentDate = new Date()
@@ -29,7 +29,7 @@ const AddPlaceScreen = ({ navigation }) => {
             placeFormInputs.placename,
             placeFormInputs.city,
             placeFormInputs.adress,
-            imageResult.uri,
+            pickedimageResult.uri,
             currentDate.toString())
 
         dispatch(placeActions.addPlace(newPlace))
@@ -37,7 +37,7 @@ const AddPlaceScreen = ({ navigation }) => {
     }
 
     const addPlace_LastCheck = (placeInfoInputs) => {
-        if (imageResult) {
+        if (pickedimageResult) {
             Alert.alert("Ohhh yee", "Every thing is good but maybe you wanna look up one more time ;)",
                 [
                     {
@@ -85,7 +85,7 @@ const AddPlaceScreen = ({ navigation }) => {
                 console.log(error)
             }
         }
-        if (imageResult !== null) {
+        if (pickedimageResult !== null) {
             Alert.alert("Heyy", "Are you sure you gonna change Photo", [{ text: "Yes", onPress: () => fetchPhoto() }, { text: 'Cancel' }])
         } else {
             fetchPhoto()
@@ -94,23 +94,23 @@ const AddPlaceScreen = ({ navigation }) => {
 
     const handleImageResult = (res) => {
         if (res.cancelled) return
-        setImageResult(res)
+        setPickedImageResult(res)
     }
 
     const deletePhotoFromForm = () => {
-        setImageResult(null)
+        setPickedImageResult(null)
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.formStyle}>
-                <AddPlaceForm onSubmitHandler={addPlace_LastCheck} isPhotoValid={imageResult ? true : false} />
+                <AddPlaceForm onSubmitHandler={addPlace_LastCheck} isPhotoValid={pickedimageResult ? true : false} />
             </View>
             <View style={styles.imageAndButtons}>
-                {imageResult?.uri && <Image source={{ uri: imageResult?.uri }} style={styles.imageStyle} />}
+                {pickedimageResult?.uri && <Image source={{ uri: pickedimageResult?.uri }} style={styles.imageStyle} />}
                 <View style={styles.btns}>
-                    <Button title="Take Picture From Roll" color="#02f1ca" onPress={() => permissionsAndGetPhoto(fromCamera = false)} />
-                    <Button title="Take Picture From Camera" color="#02f1ca" onPress={() => permissionsAndGetPhoto(fromCamera = true)} />
+                    <Button title="Take Picture From Roll" color="#02f1ca" onPress={() => permissionsAndGetPhoto(false)} />
+                    <Button title="Take Picture From Camera" color="#02f1ca" onPress={() => permissionsAndGetPhoto(true)} />
                 </View>
             </View>
         </View>
