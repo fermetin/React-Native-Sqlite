@@ -5,27 +5,36 @@ import * as ImagePicker from 'expo-image-picker'
 
 import { PlaceModel } from '../model/PlaceModel'
 
+import { useDispatch } from 'react-redux'
+import * as placeActions from '../store/actions/places'
+
 import { TextInput } from 'react-native-gesture-handler'
 import AddPlaceForm from '../components/AddPlaceForm'
+import { Images } from '../constants/Images'
 
 
 const AddPlaceScreen = () => {
+    const dispatch = useDispatch()
     const [imageResult, setImageResult] = useState(null)
-
+    
+    
     const addingPlace = (placeInfoInputs) => {
+        
         const currentDate = new Date()
 
-        const rendom = Math.floor(Math.random() * 10000)
-
+        const random = Math.floor(Math.random() * 10000)
 
         const newPlace = new PlaceModel(
-            `p${rendom}`,
+            `p${random}`,
             placeInfoInputs.placename,
             placeInfoInputs.city,
             placeInfoInputs.adress,
-            imageResult.uri)
-        ////////  let sleepeppepepepke
-        console.log(newPlace,currentDate,rendom)
+            imageResult.uri,
+            currentDate.toString())
+
+        dispatch(placeActions.addPlace(test))
+        console.log(newPlace, currentDate, random)
+
     }
 
     const allInputsHandler = (placeInfoInputs) => {
@@ -80,14 +89,16 @@ const AddPlaceScreen = () => {
             fetchPhoto()
         }
     }
+
     const handleImageResult = (res) => {
         if (res.cancelled) return
         setImageResult(res)
     }
+
     return (
         <View style={styles.container}>
             <View style={styles.formStyle}>
-                <AddPlaceForm onSubmitHandler = {allInputsHandler} />
+                <AddPlaceForm onSubmitHandler={allInputsHandler} />
             </View>
             <View style={styles.imageAndButtons}>
                 {imageResult?.uri && <Image source={{ uri: imageResult?.uri }} style={styles.imageStyle} />}

@@ -6,7 +6,7 @@ import { Provider as PaperProvider } from 'react-native-paper'
 
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
-import { palcesReducer } from './store/reducers/places'
+import  palcesReducer  from './store/reducers/places'
 
 import { NavigationContainer } from '@react-navigation/native'
 import RootNavigator from './navigation/RootNavigator'
