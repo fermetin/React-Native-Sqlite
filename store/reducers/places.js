@@ -2,13 +2,13 @@ import { Places } from '../../model/DummyData'
 
 
 const initialState = {
-    userPlaces: Places,
+    userPlaces: [],
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case "ADD_PLACE":
-            console.log(state)
+
             return {
                 userPlaces: state.userPlaces.concat(action.newPlace)
             }

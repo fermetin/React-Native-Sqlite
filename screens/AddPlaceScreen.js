@@ -13,37 +13,39 @@ import AddPlaceForm from '../components/AddPlaceForm'
 import { Images } from '../constants/Images'
 
 
-const AddPlaceScreen = () => {
+const AddPlaceScreen = ({ navigation }) => {
     const dispatch = useDispatch()
+
     const [imageResult, setImageResult] = useState(null)
-    
-    
-    const addingPlace = (placeInfoInputs) => {
-        
+
+    const addNewPlaceRedux = (placeFormInputs) => {
+
         const currentDate = new Date()
 
-        const random = Math.floor(Math.random() * 10000)
+        const randomCount = Math.floor(Math.random() * 10000)
 
         const newPlace = new PlaceModel(
-            `p${random}`,
-            placeInfoInputs.placename,
-            placeInfoInputs.city,
-            placeInfoInputs.adress,
+            `p${randomCount}`,
+            placeFormInputs.placename,
+            placeFormInputs.city,
+            placeFormInputs.adress,
             imageResult.uri,
             currentDate.toString())
 
-        dispatch(placeActions.addPlace(test))
-        console.log(newPlace, currentDate, random)
-
+        dispatch(placeActions.addPlace(newPlace))
+        navigation.goBack()
     }
 
-    const allInputsHandler = (placeInfoInputs) => {
+    const addPlace_LastCheck = (placeInfoInputs) => {
         if (imageResult) {
             Alert.alert("Ohhh yee", "Every thing is good but maybe you wanna look up one more time ;)",
                 [
                     {
                         text: "Gooo",
-                        onPress: () => addingPlace(placeInfoInputs)
+                        onPress: () => {
+                            addNewPlaceRedux(placeInfoInputs)
+                            deletePhotoFromForm()
+                        }
                     },
                     {
                         text: "Let's Look",
@@ -53,7 +55,7 @@ const AddPlaceScreen = () => {
         }
     }
 
-    const getPhotoAllStaff = (fromCamera) => {
+    const permissionsAndGetPhoto = (fromCamera) => {
         const fetchPhoto = async () => {
             try {
                 if (fromCamera) {
@@ -95,16 +97,20 @@ const AddPlaceScreen = () => {
         setImageResult(res)
     }
 
+    const deletePhotoFromForm = () => {
+        setImageResult(null)
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.formStyle}>
-                <AddPlaceForm onSubmitHandler={allInputsHandler} />
+                <AddPlaceForm onSubmitHandler={addPlace_LastCheck} isPhotoValid={imageResult ? true : false} />
             </View>
             <View style={styles.imageAndButtons}>
                 {imageResult?.uri && <Image source={{ uri: imageResult?.uri }} style={styles.imageStyle} />}
                 <View style={styles.btns}>
-                    <Button title="Take Picture From Roll" color="#02f1ca" onPress={() => getPhotoAllStaff(false)} />
-                    <Button title="Take Picture From Camera" color="#02f1ca" onPress={() => getPhotoAllStaff(true)} />
+                    <Button title="Take Picture From Roll" color="#02f1ca" onPress={() => permissionsAndGetPhoto(fromCamera = false)} />
+                    <Button title="Take Picture From Camera" color="#02f1ca" onPress={() => permissionsAndGetPhoto(fromCamera = true)} />
                 </View>
             </View>
         </View>

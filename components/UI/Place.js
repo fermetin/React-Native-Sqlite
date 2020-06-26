@@ -9,7 +9,7 @@ const Place = ({ item }) => {
         <View style={styles.container}>
             <View style={styles.imageContiner} >
                 <Image
-                    source={Images.defaultImage}
+                    source={{uri : item.imgUrl}}
                     style={styles.imageStyle}
                     resizeMode='contain'
                 />

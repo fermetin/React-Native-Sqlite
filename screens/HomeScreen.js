@@ -7,7 +7,9 @@ import Place from '../components/UI/Place'
 
 const HomeScreen = () => {
     //List all places the user have
-    const allPlaces = useSelector(state => state.places.userPlaces)
+    const  allPlaces = useSelector(state => state.places.userPlaces)
+    
+    
 
     return (
         <SafeAreaView style={styles.container} >
