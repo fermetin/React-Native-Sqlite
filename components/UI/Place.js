@@ -15,7 +15,7 @@ const Place = ({ item }) => {
                 />
             </View>
             <View style={styles.infContainer} >
-                <TouchableOpacity activeOpacity={0.6} onPress={()=>console.log("touchable pressed")} onLongPress={()=>console.log("long press test")} >
+                <TouchableOpacity activeOpacity={0.6} onPress={()=>console.log(item.id)} onLongPress={()=>console.log("long press test")} >
                     <View style={styles.headerContainer}>
                         <Text style={styles.headerStyle} lineBreakMode="tail" >{item.name.toUpperCase()}</Text>
                     </View>

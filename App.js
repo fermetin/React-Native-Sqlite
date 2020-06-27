@@ -24,7 +24,6 @@ initDb()
   throw err
 })
 
-
 const rootReducers = combineReducers({
   
   places: palcesReducer
