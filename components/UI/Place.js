@@ -4,7 +4,7 @@ import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handl
 import { Images } from '../../constants/Images'
 
 const Place = ({ item }) => {
-
+    
     return (
         <View style={styles.container}>
             <View style={styles.imageContiner} >

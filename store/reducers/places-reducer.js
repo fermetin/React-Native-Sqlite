@@ -17,9 +17,10 @@ export default (state = initialState, action) => {
             const arrayFromDb = action.placesArrayFromDb
             let placesWModel = new Array()
             
+
             arrayFromDb.forEach(element => {
                 let placeBuilder = new PlaceModel(
-                    element.id,
+                    element.id.toString(),
                     element.name,
                     element.city,
                     element.adress,
@@ -28,10 +29,9 @@ export default (state = initialState, action) => {
                     element.imgUrl,
                     element.date,
                 )
-                
                 placesWModel.push(placeBuilder)
             });
-            console.log(arrayFromDb)
+
             return{
                 userPlaces: placesWModel 
             }

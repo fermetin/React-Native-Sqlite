@@ -8,7 +8,7 @@ export const initDb = () => {
 
         db.transaction(transaction => {
             transaction.executeSql(
-                'CREATE TABLE IF NOT EXISTS places (id INTEGER PRIMARY KEY NOT NULL,name TEXT NOT NULL,city TEXT NOT NULL,adress TEXT NOT NULL,lat REAL ,lng REAL,imageUri TEXT NOT NULL,date TEXT NOT NULL)',
+                'CREATE TABLE IF NOT EXISTS places (id INTEGER PRIMARY KEY NOT NULL,name TEXT NOT NULL,city TEXT NOT NULL,adress TEXT NOT NULL,lat REAL ,lng REAL,imgUrl TEXT NOT NULL,date TEXT NOT NULL)',
                 [],
                 (_, resultSet) => {
                     resolve(resultSet)
@@ -24,7 +24,7 @@ export const initDb = () => {
 
 export const fetchPlacesfromDb = () => {
     const promise = new Promise((resolve, reject) => {
-
+        
         db.transaction((transaction) => {
             transaction.executeSql('SELECT * FROM places',
             [],    
@@ -41,7 +41,7 @@ export const insertPlace = (place) => {
 
         db.transaction((transaction) => {
             transaction.executeSql(
-                'INSERT INTO places (name, city, adress, lat, lng, imageUri, date) VALUES(?,?,?,?,?,?,?)',
+                'INSERT INTO places (name, city, adress, lat, lng, imgUrl, date) VALUES(?,?,?,?,?,?,?)',
                 [place.name, place.city, place.adress, place.lat, place.lng, place.imgUrl, place.date],
                 (_, result) => { resolve(result) },
                 (_, error) => { reject(error) }

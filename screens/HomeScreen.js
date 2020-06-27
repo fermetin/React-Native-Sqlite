@@ -9,7 +9,7 @@ const HomeScreen = ({navigation}) => {
     const [loading, setloading] = useState(true)
     //List all places the user have
     const allPlaces = useSelector(state => state.places.userPlaces)
-
+    
     const loadingPlaces = useCallback(async () => {
 
         try {
