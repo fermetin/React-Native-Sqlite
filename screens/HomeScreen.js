@@ -20,7 +20,7 @@ const HomeScreen = ({navigation}) => {
             console.log(error)
         }
     }, [dispatch])
-
+    
     useEffect(() => {
 
         navigation.addListener('focus',loadingPlaces)
@@ -49,7 +49,7 @@ const HomeScreen = ({navigation}) => {
             <FlatList
                 data={allPlaces}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <Place item={item} />}
+                renderItem={({ item }) => <Place item={item} navigation={navigation} />}
             />
         </SafeAreaView>
     )

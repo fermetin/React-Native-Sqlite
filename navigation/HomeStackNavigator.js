@@ -12,7 +12,7 @@ const HomeStack = createStackNavigator()
 const HomeStackNavigator = () => {
     return (
 
-        <HomeStack.Navigator  >
+        <HomeStack.Navigator  initialRouteName="Home">
             <HomeStack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -31,7 +31,9 @@ const HomeStackNavigator = () => {
             <HomeStack.Screen
                 name="Place Details Screen"
                 component={PlaceDetailsScreen}
-                options={{}}
+                options={{
+                    headerShown : false
+                }}
             />
         </HomeStack.Navigator>
     )

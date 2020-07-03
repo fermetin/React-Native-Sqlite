@@ -26,6 +26,8 @@ const RootNavigator = ({ navigation }) => {
             <RootStack.Screen
                 name="BottomTabNavigator"
                 component={BottomTabNavigator}
+                options={{
+                }}
             />
         </RootStack.Navigator >
     )
