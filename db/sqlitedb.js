@@ -24,12 +24,12 @@ export const initDb = () => {
 
 export const fetchPlacesfromDb = () => {
     const promise = new Promise((resolve, reject) => {
-        
+
         db.transaction((transaction) => {
             transaction.executeSql('SELECT * FROM places',
-            [],    
-            (_, dbResultallData) => { resolve(dbResultallData) },
-            (_, dbError) => { reject(dbError) }
+                [],
+                (_, dbResultallData) => { resolve(dbResultallData) },
+                (_, dbError) => { reject(dbError) }
             )
         })
     })
@@ -38,7 +38,7 @@ export const fetchPlacesfromDb = () => {
 
 export const insertPlace = (place) => {
     const promise = new Promise((resolve, reject) => {
-
+        console.log(place)
         db.transaction((transaction) => {
             transaction.executeSql(
                 'INSERT INTO places (name, city, adress, lat, lng, imgUrl, date) VALUES(?,?,?,?,?,?,?)',
@@ -48,5 +48,22 @@ export const insertPlace = (place) => {
             )
         })
     })
+    return promise
+}
+export const updatePlace = (place) => {
+    const promise = new Promise(() => 
+
+        db.transaction((transaction) => {
+            transaction.executeSql(`UPDATE places SET name = ${place.name}, city= ${place.city}, adress= ${place.adress}, lat= ${place.lat}, lng= ${place.lng}, imgUrl= ${place.imgUrl}, date= ${place.date} WHERE id = ${place.id}`,
+                [],
+                (_, result) => {
+
+                },
+                (_, error) => {
+
+                }
+            )
+        })
+    )
     return promise
 }

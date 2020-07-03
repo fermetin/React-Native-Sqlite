@@ -57,7 +57,7 @@ export const fetchAllPlaces = () => {
             console.log(error)
             throw error
         }
-        
+        console.log(placesArray)
         dispatch({
             type: FETCH_PLACES,
             placesArrayFromDb: placesArray 
