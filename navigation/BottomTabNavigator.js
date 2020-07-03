@@ -25,7 +25,9 @@ export default function BottomTabNavigator({ navigation, route }) {
     return (
         <BottomTab.Navigator
             initialRouteName={INITAL_ROUTE_NAME}
-
+            screenOptions={{
+                 headerShown: false
+                 }}
         >
             <BottomTab.Screen
                 name="Home"
@@ -33,15 +35,17 @@ export default function BottomTabNavigator({ navigation, route }) {
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />
+            
+                    
                 }}
             />
-                <BottomTab.Screen
-                    name="AddPlace"
-                    component={AddPlaceScreen}
-                    options={{
-                        tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-add" />
-                    }}
-                />
+            <BottomTab.Screen
+                name="AddPlace"
+                component={AddPlaceScreen}
+                options={{
+                    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-add" />
+                }}
+            />
             <BottomTab.Screen
                 name="Profile"
                 component={ProfileStackNavigator}

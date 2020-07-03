@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, Button } from 'react-native'
 import { Images } from '../constants/Images'
+import AddPlaceForm from '../components/AddPlaceForm'
 
 
 
 const PlaceDetailsScreen = ({ navigation, route }) => {
     const [placeItem, setPlaceItem] = useState(route.params.item)
-    console.log(navigation)
+    const [editMode, seteditMode] = useState(false)
     useEffect(() => {
-
-    }, [])
+        navigation.setOptions({
+            headerShown: false
+        })
+    }, [navigation])
     //details for each place
     return (
         <View style={styles.container} >
             <Image
                 source={{ uri: placeItem.imgUrl }}
                 style={styles.imgStyle} />
-
+                <Button title="edit" onPress={()=>seteditMode((prevState)=> !prevState)} />
+            {editMode && <View style={styles.formcontainer} >
+                <AddPlaceForm />
+            </View>}
         </View>
     )
 }
@@ -24,12 +30,15 @@ const PlaceDetailsScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
     },
     imgStyle: {
         width: "100%",
-        height: "100%",
-        resizeMode:'contain'
+        height: "25%",
+        resizeMode: 'cover'
+    },
+    formcontainer:{
+
+
     }
 });
 

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Image, View } from 'react-native'
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack'
-
 import BottomTabNavigator from './BottomTabNavigator'
-import { Images } from '../constants/Images'
+
 
 import { Img } from 'react-image'
+import RandomImage from '../components/UI/RandomImage'
 
 const RootStack = createStackNavigator()
 
@@ -16,18 +16,18 @@ const RootNavigator = ({ navigation }) => {
     return (
         <RootStack.Navigator
             screenOptions={{
-                headerTintColor:"transparent",
+                headerTintColor: "transparent",
                 headerStyle: {
                     height: 160,
                 },
-                headerBackground: () => <RandomImage />//downside
             }}
         >
             <RootStack.Screen
                 name="BottomTabNavigator"
                 component={BottomTabNavigator}
-                options={{
-                }}
+                options={({ route }) => ({
+                    headerBackground: () => <RandomImage />
+                })}
             />
         </RootStack.Navigator >
     )
@@ -35,12 +35,3 @@ const RootNavigator = ({ navigation }) => {
 
 export default RootNavigator
 
-const RandomImage = () =>{
-
-    const randomCount = Math.floor(Math.random()*5) 
-
-return (<Image
-    source={Images.randomArray[randomCount]}
-    style={{ width: '100%', height: '100%', }}
-    resizeMode="cover"
-/>)}

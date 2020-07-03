@@ -6,10 +6,13 @@ import HomeScreen from '../screens/HomeScreen'
 import AddPlaceScreen from '../screens/AddPlaceScreen'
 import FullSizeMapScreen from '../screens/FullSizeMapScreen'
 import PlaceDetailsScreen from '../screens/PlaceDetailsScreen'
+import RandomImage from '../components/UI/RandomImage'
 
 const HomeStack = createStackNavigator()
 
-const HomeStackNavigator = () => {
+const HomeStackNavigator = ({navigation,route}) => {
+
+
     return (
 
         <HomeStack.Navigator  initialRouteName="Home">
@@ -32,7 +35,6 @@ const HomeStackNavigator = () => {
                 name="Place Details Screen"
                 component={PlaceDetailsScreen}
                 options={{
-                    headerShown : false
                 }}
             />
         </HomeStack.Navigator>
