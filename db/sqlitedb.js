@@ -36,9 +36,9 @@ export const fetchPlacesfromDb = () => {
     return promise
 }
 
-export const insertPlace = (place) => {
+export const insertPlacetoDb = (place) => {
     const promise = new Promise((resolve, reject) => {
-        
+
         db.transaction((transaction) => {
             transaction.executeSql(
                 'INSERT INTO places (name, city, adress, lat, lng, imgUrl, date) VALUES(?,?,?,?,?,?,?)',
@@ -50,8 +50,24 @@ export const insertPlace = (place) => {
     })
     return promise
 }
-export const updatePlace = (place) => {
-    const promise = new Promise(() => 
+
+export const deletePlacefromDb = (itemid) => {
+    console.log(itemid)
+    const promise = new Promise((resolve, reject) => {
+        db.transaction((transaction) => {
+            transaction.executeSql(
+                'DELETE FROM places WHERE id = ? ',
+                [parseInt(itemid)],
+                (_, result) => { resolve(result) },
+                (_, eror) => { reject(eror) }
+            )
+        })
+    })
+    return promise
+}
+
+export const updatePlacefromDb = (place) => {
+    const promise = new Promise(() =>
 
         db.transaction((transaction) => {
             transaction.executeSql(`UPDATE places SET name = ${place.name}, city= ${place.city}, adress= ${place.adress}, lat= ${place.lat}, lng= ${place.lng}, imgUrl= ${place.imgUrl}, date= ${place.date} WHERE id = ${parseInt(place.id)}`,

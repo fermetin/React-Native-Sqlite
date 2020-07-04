@@ -5,7 +5,7 @@ export const FETCH_PLACES = 'FETCH_PLACES'
 import { PlaceModel } from '../../model/PlaceModel'
 
 import * as FileSystem from 'expo-file-system'
-import { insertPlace, fetchPlacesfromDb } from '../../db/sqlitedb'
+import { insertPlacetoDb, fetchPlacesfromDb, deletePlacefromDb, updatePlacefromDb } from '../../db/sqlitedb'
 import { getInfoAsync, getContentUriAsync, readDirectoryAsync, readAsStringAsync, deleteAsync } from 'expo-file-system'
 import { move } from 'formik'
 
@@ -26,7 +26,7 @@ export const addPlace = (newPlace) => {
             })
             newPlace.imgUrl = newPathImage
 
-            const dbResult = await insertPlace(newPlace)
+            const dbResult = await insertPlacetoDb(newPlace)
 
             newPlace.id = dbResult.insertId.toString()
 
@@ -57,10 +57,10 @@ export const fetchAllPlaces = () => {
             console.log(error)
             throw error
         }
-        
+
         dispatch({
             type: FETCH_PLACES,
-            placesArrayFromDb: placesArray 
+            placesArrayFromDb: placesArray
         })
     }
 }
@@ -70,8 +70,14 @@ export const fetchAllPlaces = () => {
 export const deletePlace = (itemid) => {
     return async (dispatch) => {
 
+        try {
+            
+            const result = await deletePlacefromDb(itemid)
 
-
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
 
         dispatch({
             type: DELETE_PLACE,
@@ -80,7 +86,7 @@ export const deletePlace = (itemid) => {
     }
 }
 /**
- *            
  *
-            
+ *
+
              */

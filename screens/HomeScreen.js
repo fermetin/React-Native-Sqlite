@@ -72,6 +72,7 @@ const HomeScreen = ({ navigation }) => {
             { cancelable: false },
         );
     }
+    
     const renderHiddenItem = ({ item }) => (
         <View style={styles.rowBack}>
             <TouchableOpacity
