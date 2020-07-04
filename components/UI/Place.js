@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
         }),
     },
     rowFront: {
-        backgroundColor: '#CCC',
     },
     imageContiner: {
         //img cont

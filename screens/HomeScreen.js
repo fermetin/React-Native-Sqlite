@@ -1,22 +1,26 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Text, View, StyleSheet, FlatList, SafeAreaView, ActivityIndicator, Animated, Dimensions } from 'react-native'
+import { Text, View, StyleSheet, FlatList, SafeAreaView, ActivityIndicator, Animated, Dimensions, Alert } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import Place from '../components/UI/Place'
-import { fetchAllPlaces } from '../store/actions/places-actions'
+import * as placesActions from '../store/actions/places-actions'
+import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler'
+import TabBarIcon from '../components/Icons/TabBarIcon'
+import { Ionicons } from '@expo/vector-icons'
 
-const openWidth = 100
+const backButtonWidth = 40
+const openWidth = backButtonWidth * 2
+
 const HomeScreen = ({ navigation }) => {
     const dispatch = useDispatch()
     const [loading, setloading] = useState(true)
     //List all places the user have
     const allPlaces = useSelector(state => state.places.userPlaces)
-
     const loadingPlaces = useCallback(async () => {
 
         try {
 
-            await dispatch(fetchAllPlaces())
+            await dispatch(placesActions.fetchAllPlaces())
 
         } catch (error) {
             console.log(error)
@@ -45,12 +49,37 @@ const HomeScreen = ({ navigation }) => {
             </View>
         )
     }
-
-    const renderHiddenItem = () => (
+    const deleteItemHandler = (item) => {
+        //delete from redux
+        //delete from db
+        Alert.alert(
+            `${item.name} gonna delete`,
+            `You sure ?`,
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                {
+                    text: 'Delete',
+                    onPress: () => {
+                        dispatch(placesActions.deletePlace(item.id))
+                    },
+                    style: 'destructive',
+                },
+            ],
+            { cancelable: false },
+        );
+    }
+    const renderHiddenItem = ({ item }) => (
         <View style={styles.rowBack}>
-            <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-                <Text style={styles.backTextWhite}>Delete</Text>
-            </View>
+            <TouchableOpacity
+                style={styles.backRightBtn}
+                onPress={() => deleteItemHandler(item)}
+            >
+                <Ionicons name="md-trash" color="white" size={50} />
+            </TouchableOpacity>
         </View>
     );
     return (
@@ -65,9 +94,6 @@ const HomeScreen = ({ navigation }) => {
                 renderHiddenItem={renderHiddenItem}
                 leftOpenValue={openWidth}
                 rightOpenValue={-openWidth}
-                stopLeftSwipe={openWidth}
-                stopRightSwipe={-openWidth}
-
             />
         </SafeAreaView>
     )
@@ -81,24 +107,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    }, backTextWhite: {
-        color: '#FFF',
     },
     rowBack: {
-        alignItems: 'center',
-        backgroundColor: 'red',
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        backgroundColor: "red",
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingLeft: 15,
+        paddingHorizontal: 18,
     },
     backRightBtn: {
         alignItems: 'center',
-        bottom: 0,
-        justifyContent: 'center',
-        position: 'absolute',
-        top: 0,
-        width: 75,
     },
     backRightBtnRight: {
         backgroundColor: 'red',

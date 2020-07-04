@@ -67,10 +67,7 @@ export const fetchAllPlaces = () => {
 // TODO update actions handle
 
 
-
-
-//sleeeeeeep
-export const deletePlace = (id) => {
+export const deletePlace = (itemid) => {
     return async (dispatch) => {
 
 
@@ -78,7 +75,7 @@ export const deletePlace = (id) => {
 
         dispatch({
             type: DELETE_PLACE,
-            id
+            itemid
         })
     }
 }

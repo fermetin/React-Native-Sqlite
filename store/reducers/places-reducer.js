@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         case "FETCH_PLACES":
             const arrayFromDb = action.placesArrayFromDb
             let placesWModel = new Array()
-            
+
 
             arrayFromDb.forEach(element => {
                 let placeBuilder = new PlaceModel(
@@ -32,8 +32,15 @@ export default (state = initialState, action) => {
                 placesWModel.push(placeBuilder)
             });
 
+            return {
+                userPlaces: placesWModel
+            }
+        case "DELETE_PLACE":
+            const newState = [...state.userPlaces]
+            const indexItem = newState.findIndex(v =>v.id === action.itemid)
+            newState.splice(indexItem,1)
             return{
-                userPlaces: placesWModel 
+                userPlaces : [...newState]
             }
     }
     return state
