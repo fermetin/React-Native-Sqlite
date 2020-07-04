@@ -15,12 +15,7 @@ const ProfileStackNavigator = ({route}) => {
                 name="Profile"
                 component={ProfileScreen}
                 options={{}}
-            /> 
-            <ProfileStack.Screen 
-            name="Add Place Screen"
-            component={AddPlaceScreen}
-            options={{}}
-        />
+            />
         </ProfileStack.Navigator>
     )
 }
