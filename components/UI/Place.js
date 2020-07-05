@@ -3,8 +3,8 @@ import { Text, View, Image, StyleSheet, Animated } from 'react-native'
 import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler'
 import { Images } from '../../constants/Images'
 
-const Place = ({ item, navigation,onPressDisabeled}) => {
-    const [timer, settimer] = useState()
+const Place = ({ item, navigation}) => {
+    
     const navigateDetailsScreen = () => {
         
         navigation.navigate("Place Details Screen", {
@@ -16,7 +16,6 @@ const Place = ({ item, navigation,onPressDisabeled}) => {
             style={styles.rowFront}
             underlayColor={'#AAA'}
             activeOpacity={1}
-            disabled={onPressDisabeled}
             onPress={navigateDetailsScreen}
             onLongPress={() => console.log("long press test")} >
             <View style={styles.container}>

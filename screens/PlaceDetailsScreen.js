@@ -16,13 +16,17 @@ const PlaceDetailsScreen = ({ navigation, route }) => {
     //details for each place
     return (
         <View style={styles.container} >
+            <View style={{alignItems:'center',margin:30}}>
+                <Text style={styles.header} >{placeItem.name}</Text>
+            </View>
             <Image
                 source={{ uri: placeItem.imgUrl }}
                 style={styles.imgStyle} />
-                <Button title="edit" onPress={()=>seteditMode((prevState)=> !prevState)} />
-            {editMode && <View style={styles.formcontainer} >
-                <AddPlaceForm />
-            </View>}
+            <Button title="edit" onPress={() => seteditMode((prevState) => !prevState)} />
+            {editMode &&
+                <View style={styles.formcontainer} >
+                    <AddPlaceForm />
+                </View>}
         </View>
     )
 }
@@ -36,7 +40,11 @@ const styles = StyleSheet.create({
         height: "25%",
         resizeMode: 'cover'
     },
-    formcontainer:{
+    header: {
+        fontSize: 20,
+        fontWeight:'bold'
+    },
+    formcontainer: {
 
 
     }

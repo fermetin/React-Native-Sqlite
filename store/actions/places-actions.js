@@ -71,9 +71,9 @@ export const deletePlace = (itemid) => {
     return async (dispatch) => {
 
         try {
-            
-            const result = await deletePlacefromDb(itemid)
 
+            const result = await deletePlacefromDb(itemid)
+            //console.log(result)
         } catch (error) {
             console.log(error)
             throw error

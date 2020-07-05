@@ -14,7 +14,6 @@ const openWidth = backButtonWidth * 2
 const HomeScreen = ({ navigation }) => {
     const dispatch = useDispatch()
     const [loading, setloading] = useState(true)
-    const [onPressPlaceItemDisabeled, setonPressPlaceItemDisabeled] = useState(false)
     //List all places the user have
     const allPlaces = useSelector(state => state.places.userPlaces)
     const loadingPlaces = useCallback(async () => {
@@ -90,11 +89,8 @@ const HomeScreen = ({ navigation }) => {
                 data={allPlaces}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>
-                    <Place item={item} navigation={navigation} onPressDisabeled={onPressPlaceItemDisabeled} />
+                    <Place item={item} navigation={navigation}  />
                 }
-                onRowOpen={()=>{setonPressPlaceItemDisabeled(true)}}
-                onRowDidOpen={()=>{setonPressPlaceItemDisabeled(false)}}
-                onRowClose={()=>{setonPressPlaceItemDisabeled(true)}}
                 renderHiddenItem={renderHiddenItem}
                 leftOpenValue={openWidth}
                 rightOpenValue={-openWidth}
